@@ -1,1 +1,1 @@
-C program that prints exactly "Programming is like building a multilingual puzzle
+UNIX is basically a simple operating system, but you have to be a genius to understand the simplicity
