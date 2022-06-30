@@ -6,7 +6,7 @@
  *
  *  * main - Entry point
  *
- *   * kkkkkkkk
+ *   * kkkkkkkk kkkkk
  *
  *    * Return: Always 0 (Success)
  *
