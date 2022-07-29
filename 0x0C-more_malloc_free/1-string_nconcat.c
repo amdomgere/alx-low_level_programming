@@ -1,46 +1,45 @@
-#include "main.h"
+#include "holberton.h"
 #include <stdlib.h>
 
 /**
- * string_nconcat - concatenates to strings
+ * *string_nconcat - concatenates two strings
  * @s1: first string
  * @s2: second string
- * @n: amount of bytes
- *
- * Return: pointer shall point to a newly allocated space in memory
- */
+ * @n: limit of s2
+ * Return: pointer to new space in memory or null
+ **/
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	char *sout;
-	unsigned int i, j, k, l;
+	unsigned int i, k, e;
+	int coun1 = 0;
+	char *q;
 
 	if (s1 == NULL)
+	{
 		s1 = "";
+	}
 	if (s2 == NULL)
+	{
 		s2 = "";
-
+	}
 	for (i = 0; s1[i] != '\0'; i++)
-		;
+	{
+		coun1 = coun1 + 1;
+	}
 
-	for (j = 0; s2[j] != '\0'; j++)
-		;
-
-	if (n > j)
-		n = j;
-
-	k = i + n;
-
-	sout = malloc(k + 1);
-
-	if (sout == NULL)
+	q = malloc(sizeof(*q) * (coun1 + n + 1));
+	if (q == NULL)
+	{
 		return (NULL);
-
-	for (i = 0; l < k; l++)
-		if (l < i)
-			sout[l] = s1[l];
-		else
-			sout[l] = s2[l - i];
-	sout[l] = '\0';
-
-	return (sout);
+	}
+	for (k = 0; s1[k] != '\0'; k++)
+	{
+		q[k] = s1[k];
+	}
+	for (e = 0; s2[e] != '\0' && e < n; e++, k++)
+	{
+		q[k] = s2[e];
+	}
+	q[k] = '\0';
+	return (q);
 }
