@@ -1,45 +1,51 @@
-#include "holberton.h"
-#include <stdlib.h>
+#include "main.h"
 
 /**
- * *string_nconcat - concatenates two strings
+ * string_nconcat - concatenates two strings.
  * @s1: first string
  * @s2: second string
- * @n: limit of s2
- * Return: pointer to new space in memory or null
- **/
+ * @n: index
+ * Return: char pointer
+ */
+
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	unsigned int i, k, e;
-	int coun1 = 0;
-	char *q;
+	char *p;
+	unsigned int size1 = 0, size2 = 0, i;
 
 	if (s1 == NULL)
-	{
 		s1 = "";
-	}
+
 	if (s2 == NULL)
-	{
 		s2 = "";
-	}
-	for (i = 0; s1[i] != '\0'; i++)
+
+	while (s1[size1] != '\0')
 	{
-		coun1 = coun1 + 1;
+		size1++;
 	}
 
-	q = malloc(sizeof(*q) * (coun1 + n + 1));
-	if (q == NULL)
+	while (s2[size2] != '\0')
 	{
-		return (NULL);
+		size2++;
 	}
-	for (k = 0; s1[k] != '\0'; k++)
+
+	if (n > size2)
+	n = size2;
+	p = malloc((size1 + n + 1) * sizeof(char));
+
+	if (p == NULL)
+		return (0);
+
+	for (i = 0; i < size1; i++)
 	{
-		q[k] = s1[k];
+		p[i] = s1[i];
 	}
-	for (e = 0; s2[e] != '\0' && e < n; e++, k++)
+
+	for (; i < (size1 + n); i++)
 	{
-		q[k] = s2[e];
+		p[i] = s2[i - size1];
 	}
-	q[k] = '\0';
-	return (q);
+	p[i] = '\0';
+
+return (p);
 }
