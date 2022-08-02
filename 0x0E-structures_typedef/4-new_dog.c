@@ -1,90 +1,53 @@
-#include <stdio.h>
 #include "dog.h"
 #include <stdlib.h>
 
 /**
- * _strlen - swaps integers with pointers.
- * @s: is a pointer to a char
+ * new_dog - creates a new dog.
+ * @name: name of the dog.
+ * @age: age of the dog.
+ * @owner: owner of the dog.
  *
- * Return: nothing.
-**/
-int _strlen(char *s)
-{
-int i;
-for (i = 0; *s != '\0'; s++)
-{
-i++;
-}
-return (i);
-}
-
-/**
- * _strncpy - Swaps integers wih pointers.
- *
- * @dest: is a pointer to a char.
- *
- * @src: is a pointer to a char.
- *
- * @n: is a pointer to an int.
- *
- * Return: Always 0.
+ * Return: struct dog.
+ * if fails, returns NULL.
  */
-
-char *_strncpy(char *dest, char *src, int n)
-{
-int i;
-
-for (i = 0; i < n && src[i] != '\0'; i++)
-dest[i] = src[i];
-
-for (i = i; i < n; i++)
-dest[i] = '\0';
-
-return (dest);
-}
-
-/**
- * new_dog - Creates function with copy of name and owner
- *
- * @name: name parameter
- * @age: age parameter
- * @owner: owner parameter
- *
- * Return: nothing.
-**/
-
 dog_t *new_dog(char *name, float age, char *owner)
 {
-dog_t *newDog;
-char *newName;
-char *newOwner;
-int size = 4;
+	dog_t *p_dog;
+	int i, lname, lowner;
 
-newDog = (dog_t *)malloc(sizeof(struct dog) * size);
-if (newDog == NULL)
-{
-free(newDog);
-return (NULL);
-}
-newName = (char *)malloc(sizeof((name) + 1) * size);
-if (newName == NULL)
-{
-free(newDog);
-return (NULL);
-}
-newOwner = (char *)malloc(sizeof((owner) + 1) * size);
-if (newOwner == NULL)
-{
-free(newDog);
-free(newName);
-return (NULL);
-}
-newName = name;
-newOwner = owner;
+	p_dog = malloc(sizeof(*p_dog));
+	if (p_dog == NULL || !(name) || !(owner))
+	{
+		free(p_dog);
+		return (NULL);
+	}
 
-newDog->name = newName;
-newDog->owner = newOwner;
-newDog->age = age;
+	for (lname = 0; name[lname]; lname++)
+		;
 
-return (newDog);
+	for (lowner = 0; owner[lowner]; lowner++)
+		;
+
+	p_dog->name = malloc(lname + 1);
+	p_dog->owner = malloc(lowner + 1);
+
+	if (!(p_dog->name) || !(p_dog->owner))
+	{
+		free(p_dog->owner);
+		free(p_dog->name);
+		free(p_dog);
+		return (NULL);
+	}
+
+	for (i = 0; i < lname; i++)
+		p_dog->name[i] = name[i];
+	p_dog->name[i] = '\0';
+
+	p_dog->age = age;
+
+	for (i = 0; i < lowner; i++)
+		p_dog->owner[i] = owner[i];
+	p_dog->owner[i] = '\0';
+
+	return (p_dog);
 }
